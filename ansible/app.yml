@@ -1,0 +1,22 @@
+---
+- name: Deploy flask_app
+  hosts: localhost
+  connection: local
+  become: yes
+
+  tasks:
+    - name: Build docker image
+      command: docker build -t flask_app .
+
+    - name: Run flask_app
+      command: docker run -d -p 5000:5000 flask_app
+
+    - name: Test application routes
+      uri:
+        url: "http://localhost:5000{{ item.path }}"
+        status_code: "{{ item.status }}"
+      loop:
+        - { path: "/", status: 200 }
+        - { path: "/ok", status: 200 }
+        - { path: "/error", status: 500 }
+        - { path: "/metrics", status: 200 }
