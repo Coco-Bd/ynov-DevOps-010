@@ -2,7 +2,6 @@
 - name: Deploy flask_app
   hosts: localhost
   connection: local
-  become: yes
 
   tasks:
     - name: Build docker image
