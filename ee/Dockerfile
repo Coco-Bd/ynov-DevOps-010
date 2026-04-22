@@ -5,6 +5,7 @@ USER root
 COPY requirements.yml /tmp/requirements.yml
 RUN ansible-galaxy collection install -r /tmp/requirements.yml
 
-RUN python3 -m pip install --no-cache-dir docker
+RUN python3 -m ensurepip && \
+    python3 -m pip install --no-cache-dir docker
 
 USER 1000
