@@ -4,11 +4,21 @@
   connection: local
 
   tasks:
+    // ... existing code ...
     - name: Build docker image
-      command: docker build -t flask_app .
+      community.docker.docker_image:
+        name: flask_app
+        source: build
+        build:
+          path: .
 
     - name: Run flask_app
-      command: docker run -d -p 5000:5000 flask_app
+      community.docker.docker_container:
+        name: flask_app
+        image: flask_app
+        state: started
+        ports:
+          - "5000:5000"
 
     - name: Test application routes
       uri:
