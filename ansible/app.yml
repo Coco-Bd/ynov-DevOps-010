@@ -4,27 +4,27 @@
   connection: local
 
   tasks:
-    - name: Build docker image
-      community.docker.docker_image:
-        name: flask_apps
-        source: build
-        build:
-          path: .
+  - name: Build docker image
+    community.docker.docker_image:
+      name: flask_apps
+      source: build
+      build:
+        path: .
 
-    - name: Run flask_app
-      community.docker.docker_container:
-        name: flask_app
-        image: flask_app
-        state: started
-        ports:
-          - "5000:5000"
+  - name: Run flask_app
+    community.docker.docker_container:
+      name: flask_app
+      image: flask_app
+      state: started
+      ports:
+        - "5000:5000"
 
-    - name: Test application routes
-      uri:
-        url: "http://localhost:5000{{ item.path }}"
-        status_code: "{{ item.status }}"
-      loop:
-        - { path: "/", status: 200 }
-        - { path: "/ok", status: 200 }
-        - { path: "/error", status: 500 }
-        - { path: "/metrics", status: 200 }
+  - name: Test application routes
+    uri:
+      url: "http://localhost:5000{{ item.path }}"
+      status_code: "{{ item.status }}"
+    loop:
+      - { path: "/", status: 200 }
+      - { path: "/ok", status: 200 }
+      - { path: "/error", status: 500 }
+      - { path: "/metrics", status: 200 }
