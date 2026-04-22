@@ -2,29 +2,37 @@
 - name: Deploy flask_app
   hosts: localhost
   connection: local
+  collections:
+    - community.docker
 
   tasks:
-  - name: Build docker image
-    community.docker.docker_image:
-      name: flask_apps
-      source: build
-      build:
-        path: .
+    - name: Remove existing flask_app container if present
+      community.docker.docker_container:
+        name: flask_app
+        state: absent
+        force_kill: true
 
-  - name: Run flask_app
-    community.docker.docker_container:
-      name: flask_app
-      image: flask_app
-      state: started
-      ports:
-        - "5000:5000"
+    - name: Build docker image
+      community.docker.docker_image:
+        name: flask_app
+        source: build
+        build:
+          path: .
 
-  - name: Test application routes
-    uri:
-      url: "http://localhost:5000{{ item.path }}"
-      status_code: "{{ item.status }}"
-    loop:
-      - { path: "/", status: 200 }
-      - { path: "/ok", status: 200 }
-      - { path: "/error", status: 500 }
-      - { path: "/metrics", status: 200 }
+    - name: Run flask_app
+      community.docker.docker_container:
+        name: flask_app
+        image: flask_app
+        state: started
+        ports:
+          - "5000:5000"
+
+    - name: Test application routes
+      uri:
+        url: "http://localhost:5000{{ item.path }}"
+        status_code: "{{ item.status }}"
+      loop:
+        - { path: "/", status: 200 }
+        - { path: "/ok", status: 200 }
+        - { path: "/error", status: 500 }
+        - { path: "/metrics", status: 200 }
