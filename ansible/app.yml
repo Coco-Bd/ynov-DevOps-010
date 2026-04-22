@@ -6,8 +6,10 @@
     - name: "Appliquer les ressources Kubernetes (Deployment + Service)"
       kubernetes.core.k8s:
         host: https://kubernetes.default.svc
-        auth_kind: serviceaccount
+        # pick tocken on k8s
+        api_key: "{{ lookup('ansible.builtin.file', '/var/run/secrets/kubernetes.io/serviceaccount/token') }}"
         verify_ssl: false
+
         state: present
         definition:
           - apiVersion: apps/v1
