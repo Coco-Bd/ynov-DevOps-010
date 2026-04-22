@@ -1,4 +1,6 @@
-.venv
-__pycache__
-.git
-.idea
+venv/
+lib/
+.git/
+.idea/
+ansible/
+ee/
