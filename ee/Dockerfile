@@ -2,7 +2,6 @@ FROM quay.io/ansible/awx-ee:latest
 
 USER root
 
-// ... existing code ...
 COPY requirements.yml /tmp/requirements.yml
 RUN ansible-galaxy collection install -r /tmp/requirements.yml
 
