@@ -5,6 +5,8 @@
   tasks:
     - name: "Appliquer les ressources Kubernetes (Deployment + Service)"
       kubernetes.core.k8s:
+        host: https://kubernetes.default.svc
+        verify_ssl: false
         state: present
         definition:
           - apiVersion: apps/v1
