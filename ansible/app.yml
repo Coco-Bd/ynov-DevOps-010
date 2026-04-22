@@ -6,6 +6,7 @@
     - name: "Appliquer les ressources Kubernetes (Deployment + Service)"
       kubernetes.core.k8s:
         host: https://kubernetes.default.svc
+        auth_kind: serviceaccount
         verify_ssl: false
         state: present
         definition:
@@ -28,7 +29,7 @@
                 spec:
                   containers:
                   - name: flask-app
-                    image: c0cocode/flask-app-010:v1  # My flask app
+                    image: c0cocode/flask-app-010:v1
                     imagePullPolicy: Always
                     ports:
                     - containerPort: 5000
