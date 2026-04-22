@@ -4,10 +4,9 @@
   connection: local
 
   tasks:
-    // ... existing code ...
     - name: Build docker image
       community.docker.docker_image:
-        name: flask_app
+        name: flask_apps
         source: build
         build:
           path: .
