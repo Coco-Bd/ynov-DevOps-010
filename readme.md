@@ -59,7 +59,8 @@ Plutôt que d'exécuter Ansible localement, le cycle de vie est géré par l'int
 ### 🚀 Utilisation de la Web App
 L'application est accessible directement via l'adresse IP publique du VPS sur le port configuré :
 
-**Base URL :** `http://57.128.51.49:31000/`
+**WEBAPP URL :** `http://57.128.51.49:31000/`
+**AWX URL :** `http://57.128.51.49:31358/`
 
 Pour tester le bon fonctionnement et la production des données, 4 endpoints sont disponibles :
 
