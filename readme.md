@@ -68,3 +68,5 @@ Pour tester le bon fonctionnement et la production des données, 4 endpoints son
 * `GET /ok` : Simule un succès (HTTP 200) -> incrémente le compteur Prometheus et génère un log JSON.
 * `GET /error` : Simule une panne (HTTP 500) -> incrémente le compteur d'erreur et génère un log JSON.
 * `GET /metrics` : L'endpoint brut où Prometheus vient scraper les données.
+
+PS : L'utilisation de AWX ici n'est pas specialement necessaire car on fait tout sur du localhost. Neanmoins, c'est une techno que je voulais decouvrir, et qui a un interet particulier en entreprise. AWX facilite le travail des equipes DevOps en centralisant l'automatisation et le suivi des deploiements. En effet, il permet de stocker de maniere sécurisée les credentials (ex: login/mdp des serveurs), de gérer les droits (qui peut lancer quel playbook), et d'avoir un historique clair des actions menées sur l'infrastructure. On peut aussi mettre en place des alertes et des notifications pour être informé en temps réel des problèmes rencontrés.
